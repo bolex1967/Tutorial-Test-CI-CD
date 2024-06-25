@@ -1,0 +1,26 @@
+name: Node.js CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]  # Виконання при кожному push до гілки main
+  pull_request:
+    branches: [ "main" ]  # Виконання при кожному pull request до гілки main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'  # Встановлення Node.js версії 14
+
+    - name: Install dependencies
+      run: npm install  # Встановлення залежностей з package.json
+
+    - name: Run tests
+      run: npm test  # Запуск тестів
